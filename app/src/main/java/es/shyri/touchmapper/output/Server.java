@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import es.shyri.touchmapper.Log;
+import es.shyri.touchmapper.log.Log;
 import es.shyri.touchmapper.Main;
 
 /**
@@ -38,7 +38,6 @@ public class Server {
                 while (!Thread.currentThread()
                               .isInterrupted()) {
                     socket = serverSocket.accept();
-                    Log.l("Socket accepted");
                     InputReceiver inputReceiver = new InputReceiver(socket, handler);
                     inputReceiver.start();
                 }

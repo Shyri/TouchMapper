@@ -10,7 +10,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import es.shyri.touchmapper.Log;
+import es.shyri.touchmapper.log.Log;
+
+import static es.shyri.touchmapper.EventInput.SOURCE_KEY;
+import static es.shyri.touchmapper.EventInput.SOURCE_MOVEMENT;
 
 /**
  * Created by shyri on 08/09/17.
@@ -39,7 +42,6 @@ public class InputReceiver {
             this.clientSocket = clientSocket;
 
             try {
-                Log.l("Starting comm Thread");
                 this.input = new DataInputStream(this.clientSocket.getInputStream());
 
             } catch (IOException e) {
@@ -62,18 +64,16 @@ public class InputReceiver {
                 int type = parcel.readInt();
                 parcel.setDataPosition(0);
 
-                if (type == 1) {
+                if (type == SOURCE_MOVEMENT) {
                     MotionEvent event = MotionEvent.CREATOR.createFromParcel(parcel);
 
-                    message.what = 1;
+                    message.what = SOURCE_MOVEMENT;
                     message.obj = event;
-                    Log.l("Motion Event Received");
-                } else if (type == 2) {
+                } else if (type == SOURCE_KEY) {
                     KeyEvent event = KeyEvent.CREATOR.createFromParcel(parcel);
 
-                    message.what = 2;
+                    message.what = SOURCE_KEY;
                     message.obj = event;
-                    Log.l("Key Event Received");
                 } else {
                     Log.l("Message not recognized" + message.obj);
                 }

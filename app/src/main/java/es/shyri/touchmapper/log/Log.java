@@ -1,4 +1,4 @@
-package es.shyri.touchmapper;
+package es.shyri.touchmapper.log;
 
 /**
  * Created by shyri on 08/09/17.
