@@ -51,32 +51,33 @@ public class TouchSimulator {
         pointerPropertieses.remove(pointerIndex);
     }
 
-    public void simulateTouch(int mapId, int action, int x, int y) throws InvocationTargetException, IllegalAccessException {
+    public void simulateTouch(int mapId,
+                              int originalAction,
+                              int x,
+                              int y) throws InvocationTargetException, IllegalAccessException {
         int pointerIndex;
+        int unmaskedAction = originalAction;
 
-        if (action == ACTION_DOWN) {
+        if (originalAction == ACTION_DOWN) {
             pointers++;
             pointerIndex = addPointer(mapId);
             if (pointers > 1) {
                 //                action = ACTION_POINTER_DOWN;
-                action = getUnmaskedAction(ACTION_POINTER_DOWN, pointerIndex);
+                unmaskedAction = getUnmaskedAction(ACTION_POINTER_DOWN, pointerIndex);
             }
-        } else if (action == ACTION_UP) {
+        } else if (originalAction == ACTION_UP) {
             pointers--;
             pointerIndex = getPointerIndex(mapId);
             if (pointers > 0) {
                 //                action = ACTION_POINTER_UP;
-                action = getUnmaskedAction(ACTION_POINTER_UP, pointerIndex);
+                unmaskedAction = getUnmaskedAction(ACTION_POINTER_UP, pointerIndex);
             }
         } else {
             pointerIndex = getPointerIndex(mapId);
         }
 
-        Log.l("Simulating touch " + action + " in " + x + "," + y + " pointers: " + pointers);
+        Log.l("Simulating touch " + originalAction + " in " + x + "," + y + " pointers: " + pointers);
 
-        //        eventInput.injectMotionEvent(InputDeviceCompat.SOURCE_TOUCHSCREEN, action, SystemClock.uptimeMillis(),
-        // pointers, x,
-        //                                     y);
         MotionEvent.PointerCoords pointerCoords = pointerCoordses.get(pointerIndex);
         MotionEvent.PointerProperties pointerProperties = pointerPropertieses.get(pointerIndex);
 
@@ -92,11 +93,11 @@ public class TouchSimulator {
         pointerCoords.y = y;
         pointerCoords.pressure = 1.0f;
 
-        eventInput.injectTouch(action,
+        eventInput.injectTouch(unmaskedAction,
                                pointerPropertieses.toArray(new MotionEvent.PointerProperties[pointerPropertieses.size()]),
                                pointerCoordses.toArray(new MotionEvent.PointerCoords[pointerCoordses.size()]));
 
-        if (action == ACTION_UP || action == ACTION_POINTER_UP) {
+        if (originalAction == ACTION_UP) {
             removePointer(pointerIndex);
         }
     }
