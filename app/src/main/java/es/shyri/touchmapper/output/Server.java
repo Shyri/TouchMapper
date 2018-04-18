@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import es.shyri.touchmapper.log.Log;
 import es.shyri.touchmapper.Main;
+import es.shyri.touchmapper.log.Log;
 
 /**
  * Created by shyri on 08/09/17.
@@ -41,10 +41,10 @@ public class Server {
                     InputReceiver inputReceiver = new InputReceiver(socket, handler);
                     inputReceiver.start();
                 }
+                Log.l("Starting server");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }

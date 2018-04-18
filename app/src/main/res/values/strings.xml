@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">TouchMapper</string>
 
+    <string name="device_info">Device Info</string>
+    <string name="device_id">id: %s</string>
+    <string name="pressed_key">key: %s</string>
+
     <string name="axis_x">AXIS_X: %1$.4f</string>
     <string name="axis_hat_x">AXIS_HAT_X: %1$.4f</string>
     <string name="axis_y">AXIS_Y: %1$.4f</string>
     <string name="axis_hat_y">AXIS_HAT_Y: %1$.4f</string>
     <string name="axis_z">AXIS_Z: %1$.4f</string>
     <string name="axis_rz">AXIS_RZ: %1$.4f</string>
+    <string name="axis_rtrigger">AXIS_RTRIGGER: %1$.4f</string>
+    <string name="axis_ltrigger">AXIS_LTRIGGER: %1$.4f</string>
+    <string name="axis_throttle">AXIS_THROTTLE: %1$.4f</string>
+    <string name="axis_brake">AXIS_BRAKE: %1$.4f</string>
 </resources>

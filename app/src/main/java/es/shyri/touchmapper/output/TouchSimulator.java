@@ -3,12 +3,15 @@ package es.shyri.touchmapper.output;
 import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import es.shyri.touchmapper.EventInput;
 import es.shyri.touchmapper.log.Log;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_POINTER_DOWN;
+import static android.view.MotionEvent.ACTION_POINTER_INDEX_MASK;
+import static android.view.MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 import static android.view.MotionEvent.ACTION_POINTER_UP;
 import static android.view.MotionEvent.ACTION_UP;
 import static android.view.MotionEvent.TOOL_TYPE_FINGER;
@@ -19,37 +22,54 @@ import static android.view.MotionEvent.TOOL_TYPE_FINGER;
 
 public class TouchSimulator {
     EventInput eventInput = new EventInput();
-    MotionEvent.PointerCoords[] pointerCoordses;
-    MotionEvent.PointerProperties[] pointerProperties;
+
+    ArrayList<MotionEvent.PointerCoords> pointerCoordses;
+    ArrayList<MotionEvent.PointerProperties> pointerPropertieses;
+
     int pointers = 0;
 
-    public TouchSimulator(int pointerCount) throws Exception {
-        pointerCoordses = new MotionEvent.PointerCoords[pointerCount];
-        pointerProperties = new MotionEvent.PointerProperties[pointerCount];
-
-        pointerCoordses[0] = new MotionEvent.PointerCoords();
-        pointerCoordses[1] = new MotionEvent.PointerCoords();
-        pointerCoordses[2] = new MotionEvent.PointerCoords();
-
-        pointerProperties[0] = new MotionEvent.PointerProperties();
-        pointerProperties[0].id = 0;
-        pointerProperties[1] = new MotionEvent.PointerProperties();
-        pointerProperties[1].id = 1;
-        pointerProperties[2] = new MotionEvent.PointerProperties();
-        pointerProperties[2].id = 2;
+    public TouchSimulator() throws Exception {
+        pointerCoordses = new ArrayList<>();
+        pointerPropertieses = new ArrayList<>();
     }
 
-    public void simulateTouch(int id, int action, int x, int y) throws InvocationTargetException, IllegalAccessException {
+    private int addPointer(int mapId) {
+
+        MotionEvent.PointerCoords pointerCoords = new MotionEvent.PointerCoords();
+        MotionEvent.PointerProperties pointerProperties = new MotionEvent.PointerProperties();
+
+        pointerProperties.id = mapId;
+
+        pointerCoordses.add(pointerCoords);
+        pointerPropertieses.add(pointerProperties);
+
+        return pointerCoordses.size() - 1;
+    }
+
+    private void removePointer(int pointerIndex) {
+        pointerCoordses.remove(pointerIndex);
+        pointerPropertieses.remove(pointerIndex);
+    }
+
+    public void simulateTouch(int mapId, int action, int x, int y) throws InvocationTargetException, IllegalAccessException {
+        int pointerIndex;
+
         if (action == ACTION_DOWN) {
             pointers++;
+            pointerIndex = addPointer(mapId);
             if (pointers > 1) {
-                action = ACTION_POINTER_DOWN;
+                //                action = ACTION_POINTER_DOWN;
+                action = getUnmaskedAction(ACTION_POINTER_DOWN, pointerIndex);
             }
         } else if (action == ACTION_UP) {
             pointers--;
+            pointerIndex = getPointerIndex(mapId);
             if (pointers > 0) {
-                action = ACTION_POINTER_UP;
+                //                action = ACTION_POINTER_UP;
+                action = getUnmaskedAction(ACTION_POINTER_UP, pointerIndex);
             }
+        } else {
+            pointerIndex = getPointerIndex(mapId);
         }
 
         Log.l("Simulating touch " + action + " in " + x + "," + y + " pointers: " + pointers);
@@ -57,23 +77,44 @@ public class TouchSimulator {
         //        eventInput.injectMotionEvent(InputDeviceCompat.SOURCE_TOUCHSCREEN, action, SystemClock.uptimeMillis(),
         // pointers, x,
         //                                     y);
-        pointerCoordses[id].x = x;
-        pointerCoordses[id].y = y;
+        MotionEvent.PointerCoords pointerCoords = pointerCoordses.get(pointerIndex);
+        MotionEvent.PointerProperties pointerProperties = pointerPropertieses.get(pointerIndex);
 
-        pointerProperties[id].clear();
-        pointerProperties[id].id = id;
-        pointerProperties[id].toolType = TOOL_TYPE_FINGER;
+        pointerCoords.x = x;
+        pointerCoords.y = y;
 
-        pointerCoordses[id].clear();
-        pointerCoordses[id].x = x;
-        pointerCoordses[id].y = y;
-        pointerCoordses[id].pressure = 1.0f;
+        pointerProperties.clear();
+        pointerProperties.id = mapId;
+        pointerProperties.toolType = TOOL_TYPE_FINGER;
 
-        MotionEvent.PointerCoords[] tmp = new MotionEvent.PointerCoords[1];
-        MotionEvent.PointerProperties[] tmpp = new MotionEvent.PointerProperties[1];
-        tmp[0] = pointerCoordses[id];
-        tmpp[0] = pointerProperties[id];
+        pointerCoords.clear();
+        pointerCoords.x = x;
+        pointerCoords.y = y;
+        pointerCoords.pressure = 1.0f;
 
-        eventInput.injectTouch(action, tmpp, tmp);
+        eventInput.injectTouch(action,
+                               pointerPropertieses.toArray(new MotionEvent.PointerProperties[pointerPropertieses.size()]),
+                               pointerCoordses.toArray(new MotionEvent.PointerCoords[pointerCoordses.size()]));
+
+        if (action == ACTION_UP || action == ACTION_POINTER_UP) {
+            removePointer(pointerIndex);
+        }
+    }
+
+    private int getPointerIndex(int pointerId) {
+        int pointerIndex = -1;
+
+        for (MotionEvent.PointerProperties pointerProperties : pointerPropertieses) {
+            pointerIndex++;
+            if (pointerProperties.id == pointerId) {
+                break;
+            }
+        }
+
+        return pointerIndex;
+    }
+
+    private int getUnmaskedAction(int action, int pointerIndex) {
+        return action | ((pointerIndex << ACTION_POINTER_INDEX_SHIFT) & ACTION_POINTER_INDEX_MASK);
     }
 }

@@ -45,8 +45,8 @@ public class EventInput {
             IllegalAccessException {
         long when = SystemClock.uptimeMillis();
         MotionEvent event =
-                MotionEvent.obtain(when, when, action, 1, pointerProperties, pointerCoords, 0, 0, 1.0f, 1.0f, 0, 0,
-                                   InputDeviceCompat.SOURCE_TOUCHSCREEN, 0);
+                MotionEvent.obtain(when, when, action, pointerProperties.length, pointerProperties, pointerCoords, 0, 0,
+                                   1.0f, 1.0f, 0, 0, InputDeviceCompat.SOURCE_TOUCHSCREEN, 0);
         event.setSource(InputDeviceCompat.SOURCE_TOUCHSCREEN);
         injectInputEventMethod.invoke(im, new Object[] {event, Integer.valueOf(2)});
     }

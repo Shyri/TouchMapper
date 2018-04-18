@@ -1,6 +1,7 @@
 package es.shyri.touchmapper.input;
 
 import android.inputmethodservice.InputMethodService;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.view.View;
  */
 
 public class GameInputMethodService extends InputMethodService {
-    private String currentDevice = "a6fffa631e21755e40b7c95de1f9cbae3f59a0b2";
+    private String currentDevice = "1436698747f9cdebcff7fbaad0e5441d8c3858b7";
     private InputSender inputSender;
 
     @Override
@@ -27,6 +28,8 @@ public class GameInputMethodService extends InputMethodService {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d("InputMethod", "Key Down " + event.getDevice()
+                                                .getDescriptor());
         if (event.getDevice()
                  .getDescriptor()
                  .equals(currentDevice)) {

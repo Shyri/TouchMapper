@@ -1,5 +1,6 @@
 package es.shyri.touchmapper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    TextView deviceNameTextView;
+    TextView deviceIdTextView;
+    TextView pressedKeyTextView;
     TextView axisXTextView;
     TextView axisXHatTextView;
     TextView axisZTextView;
     TextView axisYTextView;
     TextView axisYHatTextView;
     TextView axisRZTextView;
+    TextView axisRTriggerTextView;
+    TextView axisLTriggerTextView;
+    TextView axisThrottleTextView;
+    TextView axisBreakTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +35,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //        Intent intent = new Intent(this, MainService.class);
         //        startService(intent);
+        deviceNameTextView = (TextView) findViewById(R.id.deviceNameTextView);
+        deviceIdTextView = (TextView) findViewById(R.id.deviceIdTextView);
+        pressedKeyTextView = (TextView) findViewById(R.id.pressedKeyTextView);
         axisXTextView = (TextView) findViewById(R.id.axisXTextView);
         axisXHatTextView = (TextView) findViewById(R.id.axisXHatTextView);
         axisZTextView = (TextView) findViewById(R.id.axisZTextView);
         axisYTextView = (TextView) findViewById(R.id.axisYTextView);
         axisYHatTextView = (TextView) findViewById(R.id.axisYHatTextView);
         axisRZTextView = (TextView) findViewById(R.id.axisRZTextView);
+        axisRTriggerTextView = (TextView) findViewById(R.id.axisRTriggerTextView);
+        axisLTriggerTextView = (TextView) findViewById(R.id.axisLTriggerTextView);
+        axisThrottleTextView = (TextView) findViewById(R.id.axisThrottleTextView);
+        axisBreakTextView = (TextView) findViewById(R.id.axisBreakTextView);
 
         ArrayList gameControllerDeviceIds = new ArrayList();
         int[] deviceIds = InputDevice.getDeviceIds();
@@ -41,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
             int sources = dev.getSources();
             Log.d("Dev", "Device: " + dev.getName() + " vib: " + dev.getVibrator()
                                                                     .hasVibrator());
-            dev.getVibrator()
-               .vib(1500);
+            //            dev.getVibrator()
+            //               .vib(1500);
 
             // Verify that the device has gamepad buttons, control sticks, or both.
             if (((sources & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD) ||
@@ -88,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 //                }
             }
 
-            //            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-            //            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             InputMethodManager imeManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imeManager != null) {
                 imeManager.showInputMethodPicker();
@@ -132,7 +147,20 @@ public class MainActivity extends AppCompatActivity {
         //        } catch (IllegalAccessException e) {
         //            e.printStackTrace();
         //        }
+        InputDevice mInputDevice = event.getDevice();
 
+        deviceNameTextView.setText(mInputDevice.getName());
+        deviceIdTextView.setText(mInputDevice.getDescriptor());
+
+        boolean handled = false;
+        if ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD) {
+            if (event.getRepeatCount() == 0) {
+                pressedKeyTextView.setText(getString(R.string.pressed_key, "" + keyCode));
+            }
+            if (handled) {
+                return true;
+            }
+        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -152,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void processJoystickInput(MotionEvent event, int historyPos) {
         InputDevice mInputDevice = event.getDevice();
-
+        deviceIdTextView.setText(mInputDevice.getDescriptor());
         // Calculate the horizontal distance to move by
         // using the input value from one of these physical controls:
         // the left control stick, hat axis, or the right control stick.
@@ -172,6 +200,15 @@ public class MainActivity extends AppCompatActivity {
         axisYHatTextView.setText(getString(R.string.axis_hat_y, axis_hat_y));
         float axis_rz = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_RZ, historyPos);
         axisRZTextView.setText(getString(R.string.axis_rz, axis_rz));
+
+        float axis_rtrigger = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_RTRIGGER, historyPos);
+        axisRTriggerTextView.setText(getString(R.string.axis_rtrigger, axis_rtrigger));
+        float axis_ltrigger = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_LTRIGGER, historyPos);
+        axisLTriggerTextView.setText(getString(R.string.axis_ltrigger, axis_ltrigger));
+        float axis_throttle = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_THROTTLE, historyPos);
+        axisThrottleTextView.setText(getString(R.string.axis_throttle, axis_throttle));
+        float axis_brake = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_BRAKE, historyPos);
+        axisBreakTextView.setText(getString(R.string.axis_brake, axis_brake));
 
     }
 

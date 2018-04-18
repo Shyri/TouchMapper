@@ -13,29 +13,32 @@ import static android.view.KeyEvent.ACTION_UP;
  * Created by shyri on 09/09/17.
  */
 
-public class TapMapping {
-    private int id;
-    private final TouchSimulator touchSimulator;
+public class TapMapping extends TouchMapping {
     private int keyCode;
     private int x;
     private int y;
     private int lastAction = ACTION_UP;
+    private TouchSimulator touchSimulator;
 
-    public TapMapping(int id, int keyCode, int x, int y, TouchSimulator touchSimulator) {
-        this.id = id;
-        this.touchSimulator = touchSimulator;
+    public TapMapping(int keyCode, int x, int y, TouchSimulator touchSimulator) {
         this.keyCode = keyCode;
         this.x = x;
         this.y = y;
+        this.touchSimulator = touchSimulator;
+        pointerId = 1;
     }
 
     public void processEvent(KeyEvent event) {
-        Log.l("Processing Event" + event.getScanCode());
+        Log.l("Processing Event: " + event.getScanCode());
 
-        if (event.getKeyCode() == keyCode && lastAction != event.getAction()) {
+        if (
+            //                deviceDescriptor.equals(event.getDevice()
+            //                                         .getDescriptor()) &&
+                event.getKeyCode() == keyCode && lastAction != event.getAction()) {
+
             try {
                 lastAction = event.getAction();
-                touchSimulator.simulateTouch(id, event.getAction(), x, y);
+                touchSimulator.simulateTouch(pointerId, event.getAction(), x, y);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 e.printStackTrace();
             }

@@ -1,73 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context="MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="16dp"
+              tools:context="MainActivity">
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="@string/device_info"
+        android:textSize="20sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/deviceNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/device_info"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/axisXTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/axisXHatTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/deviceIdTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/device_id"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/axisZTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/pressedKeyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pressed_key"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/axisYTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/axisXTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_x"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/axisYHatTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/axisXHatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_hat_x"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/axisRZTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/axisZTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_z"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/axisYTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_y"
+        android:textSize="16sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motion Events:"
-            android:textSize="16sp"/>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/axisYHatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_hat_y"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/axisRZTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_rz"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/axisRTriggerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_rtrigger"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/axisLTriggerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_ltrigger"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/axisThrottleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_throttle"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/axisBreakTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/axis_throttle"
+        android:textSize="16sp"/>
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="24dp"-->
+    <!--android:orientation="vertical"-->
+    <!--app:layout_constraintLeft_toRightOf="@+id/linearLayout"-->
+    <!--tools:layout_editor_absoluteY="0dp">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="18sp"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/linearLayout"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="18sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonDPadUpTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonDPadDownTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonDPadLeftTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonDPadRightTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonATextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonBTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonXTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/buttonYTextView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Motion Events:"-->
+    <!--android:textSize="16sp"/>-->
+    <!--</LinearLayout>-->
+</LinearLayout>

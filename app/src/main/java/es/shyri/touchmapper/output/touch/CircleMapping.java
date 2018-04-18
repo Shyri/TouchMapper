@@ -10,56 +10,57 @@ import es.shyri.touchmapper.output.TouchSimulator;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
+import static android.view.MotionEvent.AXIS_X;
+import static android.view.MotionEvent.AXIS_Y;
 
 /**
  * Created by shyri on 09/09/17.
  */
 
-public class CircleMapping {
+public class CircleMapping extends TouchMapping {
     private final TouchSimulator touchSimulator;
-    int id;
     int x;
     int y;
     int radius;
-
     int status = 0;
 
-    public CircleMapping(int id, int x, int y, int radius, TouchSimulator touchSimulator) {
-        this.id = id;
+    public CircleMapping(int x, int y, int radius, TouchSimulator touchSimulator) {
         this.touchSimulator = touchSimulator;
         this.x = x;
         this.y = y;
         this.radius = radius;
+        pointerId = 0;
     }
 
     public void processEvent(MotionEvent event) {
-        Log.l("Processing Event" + event);
+        Log.l("Processing Event: " + event);
         InputDevice mInputDevice = event.getDevice();
 
-        float axis_x = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_X);
+        float axis_x = getCenteredAxis(event, mInputDevice, AXIS_X);
 
-        float max = mInputDevice.getMotionRange(MotionEvent.AXIS_X)
+        float max = mInputDevice.getMotionRange(AXIS_X)
                                 .getMax();
         float x1 = radius * (axis_x / max);
 
-        float axis_y = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_Y);
+        float axis_y = getCenteredAxis(event, mInputDevice, AXIS_Y);
 
-        float maxY = mInputDevice.getMotionRange(MotionEvent.AXIS_Y)
+        float maxY = mInputDevice.getMotionRange(AXIS_Y)
                                  .getMax();
         float y1 = radius * (axis_y / maxY);
+
         try {
 
             switch (status) {
                 case 0:
-                    touchSimulator.simulateTouch(id, ACTION_DOWN, (int) (x + x1), (int) (y + y1));
+                    touchSimulator.simulateTouch(pointerId, ACTION_DOWN, (int) (x + x1), (int) (y + y1));
                     status = 1;
                     break;
                 case 1:
-                    if (x1 == 0 && y == 0) {
-                        touchSimulator.simulateTouch(id, ACTION_UP, (int) (x + x1), (int) (y + y1));
+                    if (axis_x == 0 && axis_y == 0) {
+                        touchSimulator.simulateTouch(pointerId, ACTION_UP, (int) (x + x1), (int) (y + y1));
                         status = 0;
                     } else {
-                        touchSimulator.simulateTouch(id, event.getAction(), (int) (x + x1), (int) (y + y1));
+                        touchSimulator.simulateTouch(pointerId, event.getAction(), (int) (x + x1), (int) (y + y1));
                     }
                     break;
             }
