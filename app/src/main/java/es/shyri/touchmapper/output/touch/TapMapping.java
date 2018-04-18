@@ -25,7 +25,6 @@ public class TapMapping extends TouchMapping {
         this.x = x;
         this.y = y;
         this.touchSimulator = touchSimulator;
-        pointerId = 1;
     }
 
     public void processEvent(KeyEvent event) {

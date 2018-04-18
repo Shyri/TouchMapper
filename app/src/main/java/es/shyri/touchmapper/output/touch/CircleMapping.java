@@ -29,7 +29,6 @@ public class CircleMapping extends TouchMapping {
         this.x = x;
         this.y = y;
         this.radius = radius;
-        pointerId = 0;
     }
 
     public void processEvent(MotionEvent event) {
