@@ -53,11 +53,11 @@ public class Main {
     public Main() {
 
         TouchConfig touchConfig = null;
-//        try {
-        //            touchConfig = readFile("/storage/self/primary/Android/data/es.shyri.touchmapper/files/mapping.json");
-        //        } catch (FileNotFoundException e) {
-        //            e.printStackTrace();
-        //        }
+        try {
+            touchConfig = readFile("/storage/self/primary/Android/data/es.shyri.touchmapper/files/mapping.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try {
             touchMapper = new TouchMapper(touchConfig);

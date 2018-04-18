@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 import java.lang.reflect.InvocationTargetException;
 
 import es.shyri.touchmapper.log.Log;
-import es.shyri.touchmapper.output.TouchSimulator;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
@@ -18,14 +17,13 @@ import static android.view.MotionEvent.AXIS_Y;
  */
 
 public class CircleMapping extends TouchMapping {
-    private final TouchSimulator touchSimulator;
+    private transient int status = 0;
+
     int x;
     int y;
     int radius;
-    int status = 0;
 
-    public CircleMapping(int x, int y, int radius, TouchSimulator touchSimulator) {
-        this.touchSimulator = touchSimulator;
+    public CircleMapping(int x, int y, int radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;

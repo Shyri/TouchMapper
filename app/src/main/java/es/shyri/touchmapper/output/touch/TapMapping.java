@@ -5,7 +5,6 @@ import android.view.KeyEvent;
 import java.lang.reflect.InvocationTargetException;
 
 import es.shyri.touchmapper.log.Log;
-import es.shyri.touchmapper.output.TouchSimulator;
 
 import static android.view.KeyEvent.ACTION_UP;
 
@@ -14,17 +13,16 @@ import static android.view.KeyEvent.ACTION_UP;
  */
 
 public class TapMapping extends TouchMapping {
+    private transient int lastAction = ACTION_UP;
+
     private int keyCode;
     private int x;
     private int y;
-    private int lastAction = ACTION_UP;
-    private TouchSimulator touchSimulator;
 
-    public TapMapping(int keyCode, int x, int y, TouchSimulator touchSimulator) {
+    public TapMapping(int keyCode, int x, int y) {
         this.keyCode = keyCode;
         this.x = x;
         this.y = y;
-        this.touchSimulator = touchSimulator;
     }
 
     public void processEvent(KeyEvent event) {

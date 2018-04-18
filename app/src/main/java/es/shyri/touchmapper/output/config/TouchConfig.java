@@ -2,7 +2,7 @@ package es.shyri.touchmapper.output.config;
 
 import java.util.List;
 
-import es.shyri.touchmapper.output.touch.DragMapping;
+import es.shyri.touchmapper.output.touch.CircleMapping;
 import es.shyri.touchmapper.output.touch.TapMapping;
 
 /**
@@ -10,6 +10,6 @@ import es.shyri.touchmapper.output.touch.TapMapping;
  */
 
 public class TouchConfig {
-    public List<DragMapping> dragMappings;
+    public List<CircleMapping> circleMappings;
     public List<TapMapping> tapMappings;
 }
