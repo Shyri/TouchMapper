@@ -28,10 +28,7 @@ public class TapMapping extends TouchMapping {
     public void processEvent(KeyEvent event) {
         Log.l("Processing Event: " + event.getScanCode());
 
-        if (
-            //                deviceDescriptor.equals(event.getDevice()
-            //                                         .getDescriptor()) &&
-                event.getKeyCode() == keyCode && lastAction != event.getAction()) {
+        if (event.getKeyCode() == keyCode && lastAction != event.getAction()) {
 
             try {
                 lastAction = event.getAction();

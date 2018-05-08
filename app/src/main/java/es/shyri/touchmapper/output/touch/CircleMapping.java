@@ -9,8 +9,6 @@ import es.shyri.touchmapper.log.Log;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
-import static android.view.MotionEvent.AXIS_X;
-import static android.view.MotionEvent.AXIS_Y;
 
 /**
  * Created by shyri on 09/09/17.
@@ -18,6 +16,8 @@ import static android.view.MotionEvent.AXIS_Y;
 
 public class CircleMapping extends TouchMapping {
     private transient int status = 0;
+    int axis_x;
+    int axis_y;
 
     int x;
     int y;
@@ -30,20 +30,21 @@ public class CircleMapping extends TouchMapping {
     }
 
     public void processEvent(MotionEvent event) {
+
         Log.l("Processing Event: " + event);
-        InputDevice mInputDevice = event.getDevice();
+        InputDevice inputDevice = event.getDevice();
 
-        float axis_x = getCenteredAxis(event, mInputDevice, AXIS_X);
+        float centeredAxisX = getCenteredAxis(event, inputDevice, axis_x);
 
-        float max = mInputDevice.getMotionRange(AXIS_X)
+        float maxX = inputDevice.getMotionRange(axis_x)
                                 .getMax();
-        float x1 = radius * (axis_x / max);
+        float x1 = radius * (centeredAxisX / maxX);
 
-        float axis_y = getCenteredAxis(event, mInputDevice, AXIS_Y);
+        float centeredAxisY = getCenteredAxis(event, inputDevice, axis_y);
 
-        float maxY = mInputDevice.getMotionRange(AXIS_Y)
-                                 .getMax();
-        float y1 = radius * (axis_y / maxY);
+        float maxY = inputDevice.getMotionRange(axis_y)
+                                .getMax();
+        float y1 = radius * (centeredAxisY / maxY);
 
         try {
 
@@ -53,27 +54,18 @@ public class CircleMapping extends TouchMapping {
                     status = 1;
                     break;
                 case 1:
-                    if (axis_x == 0 && axis_y == 0) {
+                    if (centeredAxisX == 0 && centeredAxisY == 0) {
                         touchSimulator.simulateTouch(pointerId, ACTION_UP, (int) (x + x1), (int) (y + y1));
                         status = 0;
                     } else {
                         touchSimulator.simulateTouch(pointerId, event.getAction(), (int) (x + x1), (int) (y + y1));
                     }
+
                     break;
             }
         } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
-        //        float axis_y = getCenteredAxis(event, mInputDevice, MotionEvent.AXIS_Y);
-
-        //        if (event.getKeyCode() == keyCode) {
-        //            try {
-        //                touchSimulator.simulateTouch(event.getAction(), x, y);
-        //            } catch (InvocationTargetException | IllegalAccessException e) {
-        //                e.printStackTrace();
-        //            }
-        //        }
     }
 
     private static float getCenteredAxis(MotionEvent event, InputDevice device, int axis) {
