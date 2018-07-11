@@ -6,7 +6,9 @@ import android.view.MotionEvent;
 
 import es.shyri.touchmapper.output.config.TouchConfig;
 import es.shyri.touchmapper.output.touch.CircleMapping;
+import es.shyri.touchmapper.output.touch.FPSJoystick;
 import es.shyri.touchmapper.output.touch.TapMapping;
+import es.shyri.touchmapper.output.touch.TriggeredJoystickMapping;
 
 /**
  * Created by shyri on 08/09/17.
@@ -49,6 +51,22 @@ public class TouchMapper {
             touchConfig.tapMappings.get(i)
                                    .setTouchSimulator(touchSimulator);
         }
+        for (int i = 0; i < touchConfig.triggeredJoystickMappings.size(); i++) {
+            touchConfig.triggeredJoystickMappings.get(i)
+                                                 .setPointerId(i + touchConfig.circleMappings.size() +
+                                                               touchConfig.tapMappings.size());
+
+            touchConfig.triggeredJoystickMappings.get(i)
+                                                 .setTouchSimulator(touchSimulator);
+        }
+        for (int i = 0; i < touchConfig.fpsJoysticks.size(); i++) {
+            touchConfig.fpsJoysticks.get(i)
+                                    .setPointerId(i + touchConfig.circleMappings.size() + touchConfig.tapMappings.size() +
+                                                  touchConfig.triggeredJoystickMappings.size());
+
+            touchConfig.fpsJoysticks.get(i)
+                                    .setTouchSimulator(touchSimulator);
+        }
     }
 
     public void processEvent(KeyEvent event) {
@@ -56,12 +74,24 @@ public class TouchMapper {
         for (TapMapping tapMapping : touchConfig.tapMappings) {
             tapMapping.processEvent(event);
         }
+
+        for (TriggeredJoystickMapping triggeredJoystickMapping : touchConfig.triggeredJoystickMappings) {
+            triggeredJoystickMapping.processEvent(event);
+        }
     }
 
     public void processEvent(MotionEvent event) {
         Log.d(LOG_TAG, "Motion Event received");
         for (CircleMapping circleMapping : touchConfig.circleMappings) {
             circleMapping.processEvent(event);
+        }
+
+        for (TriggeredJoystickMapping triggeredJoystickMapping : touchConfig.triggeredJoystickMappings) {
+            triggeredJoystickMapping.processEvent(event);
+        }
+
+        for (FPSJoystick fpsJoystick : touchConfig.fpsJoysticks) {
+            fpsJoystick.processEvent(event);
         }
     }
 }

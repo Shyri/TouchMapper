@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         boolean handled = false;
         if ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD) {
             if (event.getRepeatCount() == 0) {
-                pressedKeyTextView.setText(getString(R.string.pressed_key, "" + keyCode));
+                pressedKeyTextView.setText(getString(R.string.pressed_key, "" + event.getKeyCode()));
             }
             if (handled) {
                 return true;

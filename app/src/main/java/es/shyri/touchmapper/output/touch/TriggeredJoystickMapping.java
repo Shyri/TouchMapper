@@ -1,18 +1,18 @@
 package es.shyri.touchmapper.output.touch;
 
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
 
-import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
 /**
- * Created by shyri on 09/09/17.
+ * Created by shyri on 11/05/2018.
  */
 
-public class CircleMapping extends TouchMapping {
+public class TriggeredJoystickMapping extends TouchMapping {
     private transient int status = 0;
     private transient long lastSent = 0;
 
@@ -22,11 +22,35 @@ public class CircleMapping extends TouchMapping {
     int x;
     int y;
     int radius;
+    int triggerKey;
 
-    public CircleMapping(int x, int y, int radius) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
+    private transient int lastX;
+    private transient int lastY;
+
+    public void processEvent(KeyEvent event) {
+        //Log.l("Processing Event: " + event.getScanCode());
+
+        if (event.getKeyCode() == triggerKey) {
+            try {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (status == 0) {
+                        lastX = x;
+                        lastY = y;
+                        touchSimulator.simulateTouch(pointerId, event.getAction(), x, y);
+                        status = 1;
+                    }
+
+                } else if (status == 1) {
+                    status = 0;
+                    touchSimulator.simulateTouch(pointerId, event.getAction(), lastX, lastY);
+                }
+
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void processEvent(MotionEvent event) {
@@ -50,22 +74,24 @@ public class CircleMapping extends TouchMapping {
 
             switch (status) {
                 case 0:
-                    if (Math.abs(centeredAxisX) >= 0.01 || Math.abs(centeredAxisY) >= 0.01) {
-                        touchSimulator.simulateTouch(pointerId, ACTION_DOWN, (int) (x + x1), (int) (y + y1));
-                        status = 1;
-                    }
+                    // ignore
                     break;
                 case 1:
-                    if (Math.abs(centeredAxisX) < 0.01 && Math.abs(centeredAxisY) < 0.01) {
+
+                    if (Math.abs(centeredAxisX) <= 0.01 && Math.abs(centeredAxisY) <= 0.01 && Math.abs(lastX) > 0.01 &&
+                        Math.abs(lastY) > 0.01) {
                         touchSimulator.simulateTouch(pointerId, ACTION_UP, (int) (x + x1), (int) (y + y1));
                         status = 0;
                     } else {
+
                         long now = System.currentTimeMillis();
                         if (now - lastSent > 50) {
                             touchSimulator.simulateTouch(pointerId, event.getAction(), (int) (x + x1), (int) (y + y1));
                             lastSent = now;
                         }
                     }
+                    lastX = (int) (x + x1);
+                    lastY = (int) (y + y1);
 
                     break;
             }
