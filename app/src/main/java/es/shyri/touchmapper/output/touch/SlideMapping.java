@@ -5,6 +5,7 @@ package es.shyri.touchmapper.output.touch;
  */
 
 public class SlideMapping extends TouchMapping {
+    public static final String KEY_TYPE = "SLIDE";
     private static final int AXIS_X = 0;
     private static final int AXIS_Y = 0;
 

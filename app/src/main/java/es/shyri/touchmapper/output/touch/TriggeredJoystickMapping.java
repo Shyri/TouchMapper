@@ -13,8 +13,7 @@ import static android.view.MotionEvent.ACTION_UP;
  */
 
 public class TriggeredJoystickMapping extends TouchMapping {
-    private transient int status = 0;
-    private transient long lastSent = 0;
+    public static final String KEY_TYPE = "TRIGGERED_JOYSTICK";
 
     int axis_x;
     int axis_y;
@@ -23,6 +22,9 @@ public class TriggeredJoystickMapping extends TouchMapping {
     int y;
     int radius;
     int triggerKey;
+
+    private transient int status = 0;
+    private transient long lastSent = 0;
 
     private transient int lastX;
     private transient int lastY;

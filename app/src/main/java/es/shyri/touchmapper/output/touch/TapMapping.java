@@ -13,11 +13,13 @@ import static android.view.KeyEvent.ACTION_UP;
  */
 
 public class TapMapping extends TouchMapping {
-    private transient int lastAction = ACTION_UP;
+    public static final String KEY_TYPE = "TAP";
 
     private int keyCode;
     private int x;
     private int y;
+
+    private transient int lastAction = ACTION_UP;
 
     public TapMapping(int keyCode, int x, int y) {
         this.keyCode = keyCode;

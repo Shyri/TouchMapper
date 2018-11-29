@@ -13,8 +13,7 @@ import static android.view.MotionEvent.ACTION_UP;
  */
 
 public class CircleMapping extends TouchMapping {
-    private transient int status = 0;
-    private transient long lastSent = 0;
+    public static final String KEY_TYPE = "CIRCLE";
 
     int axis_x;
     int axis_y;
@@ -22,6 +21,9 @@ public class CircleMapping extends TouchMapping {
     int x;
     int y;
     int radius;
+
+    private transient int status = 0;
+    private transient long lastSent = 0;
 
     public CircleMapping(int x, int y, int radius) {
         this.x = x;

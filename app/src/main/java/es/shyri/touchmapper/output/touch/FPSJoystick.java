@@ -15,16 +15,18 @@ import static android.view.MotionEvent.ACTION_UP;
  */
 
 public class FPSJoystick extends TouchMapping {
-    private transient int status = 0;
-
-    int axis_x;
-    int axis_y;
-
+    public static final String KEY_TYPE = "FPS_JOYSTICK";
     int x;
     int y;
 
     int radius;
-    int lastX;
+
+    int axis_x;
+    int axis_y;
+
+    private transient int status = 0;
+
+    private transient int lastX;
 
     public void processEvent(MotionEvent event) {
 

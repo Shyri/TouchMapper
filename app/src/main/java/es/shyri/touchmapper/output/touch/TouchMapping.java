@@ -10,6 +10,8 @@ import es.shyri.touchmapper.output.TouchSimulator;
  */
 
 public abstract class TouchMapping {
+    public static final String PAYMENT_TYPE_KEY = "type";
+
     protected transient TouchSimulator touchSimulator;
     protected transient int pointerId;
 

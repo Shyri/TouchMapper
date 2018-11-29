@@ -5,6 +5,7 @@ import java.util.List;
 import es.shyri.touchmapper.output.touch.CircleMapping;
 import es.shyri.touchmapper.output.touch.FPSJoystick;
 import es.shyri.touchmapper.output.touch.TapMapping;
+import es.shyri.touchmapper.output.touch.TouchMapping;
 import es.shyri.touchmapper.output.touch.TriggeredJoystickMapping;
 
 /**
@@ -16,4 +17,5 @@ public class TouchConfig {
     public List<TapMapping> tapMappings;
     public List<TriggeredJoystickMapping> triggeredJoystickMappings;
     public List<FPSJoystick> fpsJoysticks;
+    public List<TouchMapping> mappings;
 }
