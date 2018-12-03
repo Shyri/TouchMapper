@@ -1,6 +1,7 @@
 package es.shyri.touchmapper.output.touch;
 
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
@@ -27,6 +28,11 @@ public class FPSJoystick extends TouchMapping {
     private transient int status = 0;
 
     private transient int lastX;
+
+    @Override
+    public void processEvent(KeyEvent keyEvent) {
+
+    }
 
     public void processEvent(MotionEvent event) {
 

@@ -6,16 +6,13 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
-
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.net.ServerSocket;
 
 import es.shyri.touchmapper.output.Server;
 import es.shyri.touchmapper.output.TouchMapper;
+import es.shyri.touchmapper.output.config.ConfigParser;
 import es.shyri.touchmapper.output.config.TouchConfig;
 
 import static es.shyri.touchmapper.EventInput.SOURCE_KEY;
@@ -79,8 +76,7 @@ public class Main {
     }
 
     private TouchConfig readFile(String fileName) throws FileNotFoundException {
-        Gson gson = new GsonBuilder().create();
-        JsonReader reader = new JsonReader(new FileReader(fileName));
-        return gson.fromJson(reader, TouchConfig.class);
+        ConfigParser configParser = new ConfigParser();
+        return configParser.parseConfig(new File(fileName));
     }
 }

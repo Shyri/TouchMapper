@@ -3,9 +3,7 @@ package es.shyri.touchmapper;
 import android.hardware.input.InputManager;
 import android.os.SystemClock;
 import android.support.v4.view.InputDeviceCompat;
-import android.view.InputDevice;
 import android.view.InputEvent;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
@@ -51,30 +49,7 @@ public class EventInput {
         injectInputEventMethod.invoke(im, new Object[] {event, Integer.valueOf(2)});
     }
 
-    public void injectMotionEvent(int inputSource,
-                                  int action,
-                                  long when,
-                                  int pointerCount,
-                                  float x,
-                                  float y) throws InvocationTargetException, IllegalAccessException {
-        MotionEvent event = MotionEvent.obtain(when, when, action, pointerCount, x, y, 1.0f, 1.0f, 0, 1.0f, 1.0f, 0, 0);
-        event.setSource(inputSource);
-        injectInputEventMethod.invoke(im, new Object[] {event, Integer.valueOf(0)});
-    }
-
-    private void injectKeyEvent(KeyEvent event) throws InvocationTargetException, IllegalAccessException {
-        injectInputEventMethod.invoke(im, new Object[] {event, Integer.valueOf(0)});
-    }
-
     public int[] getInputDevices() {
         return im.getInputDeviceIds();
-    }
-
-    public InputDevice getInputDevice(int id) {
-        return im.getInputDevice(id);
-    }
-
-    public void register(InputManager.InputDeviceListener inputDeviceListener) {
-        im.registerInputDeviceListener(inputDeviceListener, null);
     }
 }

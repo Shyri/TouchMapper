@@ -1,6 +1,7 @@
 package es.shyri.touchmapper.output.touch;
 
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -39,5 +40,10 @@ public class TapMapping extends TouchMapping {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void processEvent(MotionEvent keyEvent) {
+
     }
 }

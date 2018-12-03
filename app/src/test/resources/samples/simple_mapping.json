@@ -2,9 +2,17 @@
   "mappings": [
     {
       "type": "TAP",
-      "keyCode": 34,
+      "keyCode": 96,
       "x": 100,
       "y": 100
+    },
+    {
+      "type": "CIRCLE",
+      "radius": 200,
+      "x": 100,
+      "y": 100,
+      "axis_x": 0,
+      "axis_y": 1
     }
   ]
 }

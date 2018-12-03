@@ -1,9 +1,12 @@
 package es.shyri.touchmapper.output.touch;
 
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
+
+import es.shyri.touchmapper.log.Log;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
@@ -31,9 +34,14 @@ public class CircleMapping extends TouchMapping {
         this.radius = radius;
     }
 
+    @Override
+    public void processEvent(KeyEvent keyEvent) {
+
+    }
+
     public void processEvent(MotionEvent event) {
 
-        //Log.l("Processing Event: " + event);
+        Log.l("Processing Event: " + event);
         InputDevice inputDevice = event.getDevice();
 
         float centeredAxisX = getCenteredAxis(event, inputDevice, axis_x);

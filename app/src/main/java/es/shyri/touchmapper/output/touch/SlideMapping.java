@@ -1,5 +1,8 @@
 package es.shyri.touchmapper.output.touch;
 
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+
 /**
  * Created by shyri on 09/05/2018.
  */
@@ -13,4 +16,13 @@ public class SlideMapping extends TouchMapping {
     private int startValue;
     private int endValue;
 
+    @Override
+    public void processEvent(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void processEvent(MotionEvent keyEvent) {
+
+    }
 }

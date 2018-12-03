@@ -1,6 +1,7 @@
 package es.shyri.touchmapper.output.touch;
 
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import es.shyri.touchmapper.output.TouchSimulator;
@@ -22,6 +23,10 @@ public abstract class TouchMapping {
     public void setTouchSimulator(TouchSimulator touchSimulator) {
         this.touchSimulator = touchSimulator;
     }
+
+    public abstract void processEvent(KeyEvent keyEvent);
+
+    public abstract void processEvent(MotionEvent keyEvent);
 
     protected float getCenteredAxis(MotionEvent event, InputDevice device, int axis) {
         final InputDevice.MotionRange range = device.getMotionRange(axis, event.getSource());
