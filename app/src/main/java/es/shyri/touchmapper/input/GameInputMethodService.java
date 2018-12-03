@@ -6,17 +6,28 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import es.shyri.touchmapper.output.config.ConfigParser;
+import es.shyri.touchmapper.output.config.TouchConfig;
+
 /**
  * Created by shyri on 06/09/17.
  */
 
 public class GameInputMethodService extends InputMethodService {
-    private String currentDevice = "1436698747f9cdebcff7fbaad0e5441d8c3858b7";
+    private TouchConfig touchConfig;
     private InputSender inputSender;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        try {
+            touchConfig = readFile("/storage/self/primary/Android/data/es.shyri.touchmapper/files/mapping.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         inputSender = new InputSender();
         inputSender.start();
     }
@@ -32,7 +43,7 @@ public class GameInputMethodService extends InputMethodService {
                                                 .getDescriptor());
         if (event.getDevice()
                  .getDescriptor()
-                 .equals(currentDevice)) {
+                 .equals(touchConfig.deviceId)) {
             inputSender.sendKeyEvent(event);
             return true;
         }
@@ -43,7 +54,7 @@ public class GameInputMethodService extends InputMethodService {
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (event.getDevice()
                  .getDescriptor()
-                 .equals(currentDevice)) {
+                 .equals(touchConfig.deviceId)) {
             inputSender.sendKeyEvent(event);
             return true;
         }
@@ -54,11 +65,15 @@ public class GameInputMethodService extends InputMethodService {
     public boolean onGenericMotionEvent(MotionEvent event) {
         if (event.getDevice()
                  .getDescriptor()
-                 .equals(currentDevice)) {
+                 .equals(touchConfig.deviceId)) {
             inputSender.sendMotionEvent(event);
             return true;
         }
         return super.onGenericMotionEvent(event);
     }
 
+    private TouchConfig readFile(String fileName) throws FileNotFoundException {
+        ConfigParser configParser = new ConfigParser();
+        return configParser.parseConfig(new File(fileName));
+    }
 }

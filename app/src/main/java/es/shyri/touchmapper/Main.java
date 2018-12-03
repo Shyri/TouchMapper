@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.ServerSocket;
 
 import es.shyri.touchmapper.output.Server;
 import es.shyri.touchmapper.output.TouchMapper;
@@ -24,8 +23,6 @@ import static es.shyri.touchmapper.EventInput.SOURCE_MOVEMENT;
 
 public class Main {
     static Looper looper;
-    static EventInput eventInput;
-    private ServerSocket serverSocket;
     private TouchMapper touchMapper;
 
     public static final int DEFAULT_PORT = 6543;

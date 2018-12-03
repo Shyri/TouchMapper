@@ -9,5 +9,6 @@ import es.shyri.touchmapper.output.touch.TouchMapping;
  */
 
 public class TouchConfig {
+    public String deviceId;
     public List<TouchMapping> mappings;
 }
