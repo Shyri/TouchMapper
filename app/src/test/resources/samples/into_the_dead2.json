@@ -1,0 +1,35 @@
+{
+  "deviceId": "1436698747f9cdebcff7fbaad0e5441d8c3858b7",
+  "mappings": [
+    {
+      "type": "TAP",
+      "keyCode": 96,
+      "x": 1600,
+      "y": 800,
+      "action": "shoot"
+    },
+    {
+      "type": "TAP",
+      "keyCode": 100,
+      "x": 1800,
+      "y": 50,
+      "action": "pause/skip"
+    },
+    {
+      "type": "TAP",
+      "keyCode": 103,
+      "x": 1850,
+      "y": 440,
+      "action": "change weapon (will shoot if no other weapon available)"
+    },
+    {
+      "type": "CIRCLE",
+      "radius": 200,
+      "x": 350,
+      "y": 900,
+      "axis_x": 0,
+      "axis_y": 1,
+      "action": "move"
+    }
+  ]
+}
