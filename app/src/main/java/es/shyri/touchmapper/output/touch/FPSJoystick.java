@@ -35,7 +35,6 @@ public class FPSJoystick extends TouchMapping {
     }
 
     public void processEvent(MotionEvent event) {
-
         Log.l("Processing Event: " + event);
         InputDevice inputDevice = event.getDevice();
 

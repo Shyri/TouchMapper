@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 
 import java.lang.reflect.InvocationTargetException;
 
+import es.shyri.touchmapper.log.Log;
+
 import static android.view.MotionEvent.ACTION_UP;
 
 /**
@@ -30,8 +32,7 @@ public class TriggeredJoystickMapping extends TouchMapping {
     private transient int lastY;
 
     public void processEvent(KeyEvent event) {
-        //Log.l("Processing Event: " + event.getScanCode());
-
+        Log.l("Processing Event: " + event.getScanCode());
         if (event.getKeyCode() == triggerKey) {
             try {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -56,8 +57,7 @@ public class TriggeredJoystickMapping extends TouchMapping {
     }
 
     public void processEvent(MotionEvent event) {
-
-        //Log.l("Processing Event: " + event);
+        Log.l("Processing Event: " + event);
         InputDevice inputDevice = event.getDevice();
 
         float centeredAxisX = getCenteredAxis(event, inputDevice, axis_x);

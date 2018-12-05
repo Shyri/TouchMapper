@@ -30,6 +30,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ControllerTestActivity">
+        </activity>
+
         <service
             android:name=".input.GameInputMethodService"
             android:permission="android.permission.BIND_INPUT_METHOD">

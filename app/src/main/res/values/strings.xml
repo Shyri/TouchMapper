@@ -5,14 +5,14 @@
     <string name="device_id">id: %s</string>
     <string name="pressed_key">key: %d</string>
 
-    <string name="axis_x">AXIS_X: %1$.4f</string>
-    <string name="axis_hat_x">AXIS_HAT_X: %1$.4f</string>
-    <string name="axis_y">AXIS_Y: %1$.4f</string>
-    <string name="axis_hat_y">AXIS_HAT_Y: %1$.4f</string>
-    <string name="axis_z">AXIS_Z: %1$.4f</string>
-    <string name="axis_rz">AXIS_RZ: %1$.4f</string>
-    <string name="axis_rtrigger">AXIS_RTRIGGER: %1$.4f</string>
-    <string name="axis_ltrigger">AXIS_LTRIGGER: %1$.4f</string>
-    <string name="axis_throttle">AXIS_THROTTLE: %1$.4f</string>
-    <string name="axis_brake">AXIS_BRAKE: %1$.4f</string>
+    <string name="axis_x">AXIS_X (0): %1$.4f</string>
+    <string name="axis_hat_x">AXIS_HAT_X (15): %1$.4f</string>
+    <string name="axis_y">AXIS_Y (1): %1$.4f</string>
+    <string name="axis_hat_y">AXIS_HAT_Y (16): %1$.4f</string>
+    <string name="axis_z">AXIS_Z (11): %1$.4f</string>
+    <string name="axis_rz">AXIS_RZ (14): %1$.4f</string>
+    <string name="axis_rtrigger">AXIS_RTRIGGER (18): %1$.4f</string>
+    <string name="axis_ltrigger">AXIS_LTRIGGER (17): %1$.4f</string>
+    <string name="axis_throttle">AXIS_THROTTLE (19): %1$.4f</string>
+    <string name="axis_brake">AXIS_BRAKE (23): %1$.4f</string>
 </resources>
