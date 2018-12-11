@@ -6,9 +6,9 @@ Other reason to use it in Android TV is because in order to make it work without
 
 In order to make it a bit easier, a desktop application is available that automates all process needed to run the adb commands. You can find it here: [Touch Mapper Launcher](https://github.com/Shyri/TouchMapperLauncher)
 
-Below you can find all available information for regular users and developers that might want to tweak or fork the project:
+Below you can find all available information for regular users and developers that might want to play with the code:
 
-[User Guide] (https://github.com/Shyri/TouchMapper/wiki/User-Guide)
-[Developer Guide] (https://github.com/Shyri/TouchMapper/wiki/Developer-Guide)
+[User Guide](https://github.com/Shyri/TouchMapper/wiki/User-Guide)
+[Developer Guide](https://github.com/Shyri/TouchMapper/wiki/Developer-Guide)
 
 This software is completely experimental, meaning you shouldn't be surprised if it suddenly stops working and you need to restart it or whatever other issues that might show up.
