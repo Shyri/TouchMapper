@@ -9,6 +9,7 @@ In order to make it a bit easier, a desktop application is available that automa
 Below you can find all available information for regular users and developers that might want to play with the code:
 
 [User Guide](https://github.com/Shyri/TouchMapper/wiki/User-Guide)
+
 [Developer Guide](https://github.com/Shyri/TouchMapper/wiki/Developer-Guide)
 
 This software is completely experimental, meaning you shouldn't be surprised if it suddenly stops working and you need to restart it or whatever other issues that might show up.
