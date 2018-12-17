@@ -3,6 +3,8 @@ package es.shyri.touchmapper.output.touch;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import es.shyri.touchmapper.log.Log;
+
 /**
  * Created by shyri on 09/05/2018.
  */
@@ -23,6 +25,7 @@ public class SlideMapping extends TouchMapping {
 
     @Override
     public void processEvent(MotionEvent keyEvent) {
+        Log.l("WARNING, SlideMapping Implementation is not completed");
 
     }
 }

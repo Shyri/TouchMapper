@@ -62,7 +62,6 @@ public class TouchSimulator {
             pointers++;
             pointerIndex = addPointer(mapId);
             if (pointers > 1) {
-                //                action = ACTION_POINTER_DOWN;
                 unmaskedAction = getUnmaskedAction(ACTION_POINTER_DOWN, pointerIndex);
             }
         } else if (originalAction == ACTION_UP) {
@@ -70,7 +69,6 @@ public class TouchSimulator {
                 pointers--;
                 pointerIndex = getPointerIndex(mapId);
                 if (pointers > 0) {
-                    //                action = ACTION_POINTER_UP;
                     unmaskedAction = getUnmaskedAction(ACTION_POINTER_UP, pointerIndex);
                 }
             } else {

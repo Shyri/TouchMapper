@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 public class ControllerTestActivity extends AppCompatActivity {
 
@@ -52,23 +49,6 @@ public class ControllerTestActivity extends AppCompatActivity {
         axisLTriggerTextView = (TextView) findViewById(R.id.axisLTriggerTextView);
         axisThrottleTextView = (TextView) findViewById(R.id.axisThrottleTextView);
         axisBreakTextView = (TextView) findViewById(R.id.axisBreakTextView);
-
-//        ArrayList gameControllerDeviceIds = new ArrayList();
-//        int[] deviceIds = InputDevice.getDeviceIds();
-//        for (int deviceId : deviceIds) {
-//            InputDevice dev = InputDevice.getDevice(deviceId);
-//            int sources = dev.getSources();
-//            Log.d("Dev", "Device: " + dev.getName() + " vib: " + dev.getVibrator()
-//
-//            // Verify that the device has gamepad buttons, control sticks, or both.
-//            if (((sources & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD) ||
-//                ((sources & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK)) {
-//                // This device is a game controller. Store its device ID.
-//                if (!gameControllerDeviceIds.contains(deviceId)) {
-//                    gameControllerDeviceIds.add(deviceId);
-//                }
-//            }
-//        }
     }
 
     @Override

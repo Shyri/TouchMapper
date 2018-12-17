@@ -35,7 +35,7 @@ public class FPSJoystick extends TouchMapping {
     }
 
     public void processEvent(MotionEvent event) {
-        Log.l("Processing Event: " + event);
+        Log.l("WARNING, FPSJoystick Implementation is not completed");
         InputDevice inputDevice = event.getDevice();
 
         float centeredAxisX = getCenteredAxis(event, inputDevice, axis_x);
