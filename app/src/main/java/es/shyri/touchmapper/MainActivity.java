@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showInputMethodSelector() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         InputMethodManager imeManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imeManager != null) {
             imeManager.showInputMethodPicker();
