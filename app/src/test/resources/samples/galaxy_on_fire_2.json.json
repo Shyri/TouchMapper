@@ -1,0 +1,28 @@
+{
+  "deviceId": "1436698747f9cdebcff7fbaad0e5441d8c3858b7",
+  "mappings": [
+    {
+      "type": "TAP",
+      "keyCode": 96,
+      "x": 1800,
+      "y": 550,
+      "action": "shoot"
+    },
+    {
+      "type": "TAP",
+      "keyCode": 100,
+      "x": 1800,
+      "y": 720,
+      "action": "missil"
+    },
+    {
+      "type": "CIRCLE",
+      "radius": 160,
+      "x": 160,
+      "y": 700,
+      "axis_x": 0,
+      "axis_y": 1,
+      "action": "move"
+    }
+  ]
+}
