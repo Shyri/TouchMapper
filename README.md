@@ -1,4 +1,6 @@
 # TouchMapper
+![](https://raw.githubusercontent.com/Shyri/TouchMapper/master/app/src/main/res/drawable-xhdpi/banner.png)
+
 TouchMapper is an Android App lets you map gamepad input to touch events in the screen without needing to root the device. It is inteded to be used in Android TV where you don't have a touch screen and you might want to play games that only support touch events as input. 
 It's licensed under the terms of the GNU General Public License, version 3 (GPLv3).
 
